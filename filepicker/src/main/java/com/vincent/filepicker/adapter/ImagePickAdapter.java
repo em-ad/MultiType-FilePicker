@@ -91,22 +91,23 @@ public class ImagePickAdapter extends BaseAdapter<ImageFile, ImagePickAdapter.Im
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(new Date());
-                    File file = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM).getAbsolutePath()
-                            + "/IMG_" + timeStamp + ".jpg");
-                    mImagePath = file.getAbsolutePath();
-
-                    ContentValues contentValues = new ContentValues(1);
-                    contentValues.put(MediaStore.Images.Media.DATA, mImagePath);
-                    mImageUri = mContext.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
-
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
-                    if (Util.detectIntent(mContext, intent)) {
-                        ((Activity) mContext).startActivityForResult(intent, Constant.REQUEST_CODE_TAKE_IMAGE);
-                    } else {
-                        ToastUtil.getInstance(mContext).showToast(mContext.getString(R.string.vw_no_photo_app));
-                    }
+//                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(new Date());
+//                    File file = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM).getAbsolutePath()
+//                            + "/IMG_" + timeStamp + ".jpg");
+//                    mImagePath = file.getAbsolutePath();
+//
+//                    ContentValues contentValues = new ContentValues(1);
+//                    contentValues.put(MediaStore.Images.Media.DATA, mImagePath);
+//                    mImageUri = mContext.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
+//
+//                    intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
+//                    if (Util.detectIntent(mContext, intent)) {
+//                        ((Activity) mContext).startActivityForResult(intent, Constant.REQUEST_CODE_TAKE_IMAGE);
+//                    } else {
+//                        ToastUtil.getInstance(mContext).showToast(mContext.getString(R.string.vw_no_photo_app));
+//                    }
+                    holder.mCbx.performClick();
                 }
             });
         } else {
@@ -126,18 +127,6 @@ public class ImagePickAdapter extends BaseAdapter<ImageFile, ImagePickAdapter.Im
                     .load(file.getPath())
                     .apply(options.centerCrop())
                     .transition(withCrossFade())
-                    .listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            Log.e("tag", "onLoadFailed: " + e.getMessage() );
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            return false;
-                        }
-                    })
 //                    .transition(new DrawableTransitionOptions().crossFade(500))
                     .into(holder.mIvThumbnail);
 
@@ -180,12 +169,13 @@ public class ImagePickAdapter extends BaseAdapter<ImageFile, ImagePickAdapter.Im
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(mContext, ImageBrowserActivity.class);
-                        intent.putExtra(Constant.MAX_NUMBER, mMaxNumber);
-                        intent.putExtra(IMAGE_BROWSER_INIT_INDEX,
-                                isNeedCamera ? holder.getAdapterPosition() - 1 : holder.getAdapterPosition());
-                        intent.putParcelableArrayListExtra(IMAGE_BROWSER_SELECTED_LIST, ((ImagePickActivity) mContext).mSelectedList);
-                        ((Activity) mContext).startActivityForResult(intent, Constant.REQUEST_CODE_BROWSER_IMAGE);
+//                        Intent intent = new Intent(mContext, ImageBrowserActivity.class);
+//                        intent.putExtra(Constant.MAX_NUMBER, mMaxNumber);
+//                        intent.putExtra(IMAGE_BROWSER_INIT_INDEX,
+//                                isNeedCamera ? holder.getAdapterPosition() - 1 : holder.getAdapterPosition());
+//                        intent.putParcelableArrayListExtra(IMAGE_BROWSER_SELECTED_LIST, ((ImagePickActivity) mContext).mSelectedList);
+//                        ((Activity) mContext).startActivityForResult(intent, Constant.REQUEST_CODE_BROWSER_IMAGE);
+                        holder.mCbx.performClick();
                     }
                 });
             } else {
